@@ -6,7 +6,7 @@ import apartmentRoutes from "./routes/apartment/apartmentRoutes.mjs";
 import tenantRoutes from "./routes/tenants/tenantRoutes.mjs"
 
 const app = express();
-dotenv.config({ path: ".env" });
+dotenv.config();
 const port = process.env.PORT || 8000;
 
 app.use(express.json());
