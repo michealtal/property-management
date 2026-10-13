@@ -4,8 +4,23 @@ import connectDB from "./config/database.js";
 import  authRoutes  from "./routes/users/authRoutes.mjs";
 import apartmentRoutes from "./routes/apartment/apartmentRoutes.mjs";
 import tenantRoutes from "./routes/tenants/tenantRoutes.mjs"
+import cors from "cors";
 
 const app = express();
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://property-management-frontend-i086.onrender.com",
+];
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+    methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
 dotenv.config();
 const port = process.env.PORT || 8000;
 
