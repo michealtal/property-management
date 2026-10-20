@@ -8,6 +8,28 @@ const tenantSchema = new mongoose.Schema(
       ref: "Apartment",
       required: true,
     },
+    
+    tenancyAgreementUrl: {
+      type: String,
+      default: "",
+    },
+    
+    tenancyAgreementPublicId: {
+      type: String,
+      default: "",
+    },
+    
+    rentReceiptUrl: {
+      type: String,
+      default: "",
+    },
+    
+    rentReceiptPublicId: {
+      type: String,
+      default: "",
+    },
+
+
 
     // 1. Personal Information
     personalInformation: {

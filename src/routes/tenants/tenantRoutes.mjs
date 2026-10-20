@@ -39,6 +39,8 @@ router.get(
       { name: "passportPhoto", maxCount: 1 },
       { name: "idDocument", maxCount: 1 },
       { name: "workId", maxCount: 1 },
+      { name: "tenancyAgreement", maxCount: 1 },
+      { name: "rentReceipt", maxCount: 1 },
     ]),
     uploadTenantDocuments
   );

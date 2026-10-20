@@ -434,6 +434,54 @@ export const uploadTenantDocuments = async (req, res, next) => {
       }
     }
 
+    
+if (req.files.tenancyAgreement) {
+  const oldPublicId = tenant.tenancyAgreementPublicId;
+
+  const result = await uploadToCloudinary(
+    req.files.tenancyAgreement[0].buffer,
+    "property-management/tenants/agreements",
+    "raw"
+  );
+
+  tenant.tenancyAgreementUrl = result.secure_url;
+  tenant.tenancyAgreementPublicId = result.public_id;
+
+  if (oldPublicId) {
+    try {
+      await cloudinary.uploader.destroy(oldPublicId, {
+        resource_type: "raw",
+      });
+    } catch (error) {
+      console.error("Could not delete old tenancy agreement:", error.message);
+    }
+  }
+}
+
+if (req.files.rentReceipt) {
+  const oldPublicId = tenant.rentReceiptPublicId;
+
+  const result = await uploadToCloudinary(
+    req.files.rentReceipt[0].buffer,
+    "property-management/tenants/receipts",
+    "raw"
+  );
+
+  tenant.rentReceiptUrl = result.secure_url;
+  tenant.rentReceiptPublicId = result.public_id;
+
+  if (oldPublicId) {
+    try {
+      await cloudinary.uploader.destroy(oldPublicId, {
+        resource_type: "raw",
+      });
+    } catch (error) {
+      console.error("Could not delete old rent receipt:", error.message);
+    }
+  }
+}
+
+
     await tenant.save();
 
     return res.status(httpStatus.OK).json({
